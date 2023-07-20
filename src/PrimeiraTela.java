@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -40,8 +40,17 @@ public class PrimeiraTela extends JFrame {
                 throw new RuntimeException(e);
             }
         });
+        getRootPane().setDefaultButton(confirmarButton);
 
         sairButton.addActionListener(e -> dispose());
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e){
+                dispose();
+            }
+        });
+
+        panelPrincipal.registerKeyboardAction(e -> dispose(),
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,0),JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         mapaNotacaoMoeda = new HashMap<>();
         mapaNotacaoMoeda.put("Real Brasileiro para Dólar Americano", "BRLUSD");
@@ -222,6 +231,16 @@ public class PrimeiraTela extends JFrame {
                         resultado = valor*fatorConversao;
 
                         JOptionPane.showMessageDialog(null, "Resultado: " + df.format(resultado), "Resultado", JOptionPane.INFORMATION_MESSAGE, null);
+
+                        int confirmacao = JOptionPane.showConfirmDialog(null,"deseja continuar?","continuar",JOptionPane.INFORMATION_MESSAGE);
+                        if (confirmacao == JOptionPane.YES_OPTION) {
+                            dispose();
+                            run();
+                        } else {
+                                JOptionPane.showConfirmDialog(null,"fim do programa","fim",JOptionPane.CLOSED_OPTION);
+                                dispose();
+                        }
+
                     } catch (IOException ex) {
                         ex.printStackTrace();
                         throw new RuntimeException(ex);
@@ -262,6 +281,14 @@ public class PrimeiraTela extends JFrame {
                 } else if (escolha.equals(possibilidades[3])) {
                     resultado = (valor - 32) * 1.8;
                     JOptionPane.showMessageDialog(null, "Resultado: " + df.format(resultado), "Resultado", JOptionPane.INFORMATION_MESSAGE, null);
+                }
+                int confirmacao = JOptionPane.showConfirmDialog(null,"deseja continuar?","continuar",JOptionPane.INFORMATION_MESSAGE);
+                if (confirmacao == JOptionPane.YES_OPTION) {
+                    dispose();
+                    run();
+                } else {
+                    JOptionPane.showConfirmDialog(null,"fim do programa","fim",JOptionPane.CLOSED_OPTION);
+                    dispose();
                 }
             }
 
@@ -320,6 +347,14 @@ public class PrimeiraTela extends JFrame {
                     }
 
                     JOptionPane.showMessageDialog(null, "Resultado: " + (resultado), "Resultado", JOptionPane.INFORMATION_MESSAGE, null);
+                }
+                int confirmacao = JOptionPane.showConfirmDialog(null,"deseja continuar?","continuar",JOptionPane.INFORMATION_MESSAGE);
+                if (confirmacao == JOptionPane.YES_OPTION) {
+                    dispose();
+                    run();
+                } else {
+                    JOptionPane.showConfirmDialog(null,"fim do programa","fim",JOptionPane.CLOSED_OPTION);
+                    dispose();
                 }
             }
         }
