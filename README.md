@@ -43,7 +43,7 @@ utiliza as bibliotecas awt, swing e gson , atualmente consumindo a Api de [cota�
 * Gson
 * Api cotações
   
-## Pessoas Desenvolvedoras do Projeto;
+## Pessoas Desenvolvedoras do Projeto.
 <table>
   <tr>
     <td align="center">
